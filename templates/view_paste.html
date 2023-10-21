@@ -1,15 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PasteFy - Паста</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+    <title>PasteFy - Паст от {{author}}</title>
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            margin-left: 100px;
+            width: 400px;
+        }
+
+    </style>
 </head>
 <body>
-    <h1>Ваш паст:</h1>
-    <pre>
-        {{ pasta }}
-    </pre>
-  <a href="/">На главную</a>
+    <form>
+        <h3>Автор:</h3>
+        <strong>{{ author }}</strong>
+        <h3>Паст:</h3>
+        <p>{{ pasta }}</p>
+        <a href="/"><strong>На главную</strong</a>
+    </form>
 </body>
 </html>
