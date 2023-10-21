@@ -8,37 +8,113 @@
     <title>Create Paste</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(document).ready(function() {
-          const textarea = $('#auto-resize-textarea');
+        const initApp = () => {
+    const droparea = document.querySelector('.droparea');
 
-          textarea.on('input', function () {
-            this.style.height = 'auto';
-            this.style.height = (this.scrollHeight) + 'px';
-          });
+    const active = () => droparea.classList.add("green-border");
 
-          // Инициализация размера текстового поля
-          textarea.trigger('input');
-        });
+    const inactive = () => droparea.classList.remove("green-border");
+
+    const prevents = (e) => e.preventDefault();
+
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(evtName => {
+            droparea.addEventListener(evtName, prevents);
+    });
+
+    ['dragenter', 'dragover'].forEach(evtName => {
+        droparea.addEventListener(evtName, active);
+    });
+
+    ['dragleave', 'drop'].forEach(evtName => {
+        droparea.addEventListener(evtName, inactive);
+    });
+
+    droparea.addEventListener('drop', handleDrop);
+}
+
+document.addEventListener("DOMContentLoaded", initApp)
+
+const handleDrop = (e) => {
+    const textInput = document.getElementById('auto-resize-textarea');
+    const dt = e.dataTransfer;
+    const files = dt.files;
+
+    if (files.length > 0) {
+        const txtFiles = [...files]
+
+        if (txtFiles.length > 0) {
+            const reader = new FileReader();
+            reader.onload = function () {
+                textInput.value = reader.result;
+            };
+            reader.readAsText(txtFiles[0]); // Читаем только первый .txt файл
+        } else {
+            alert('Пожалуйста, перетащите .txt файл.');
+        }
+    }
+}
+
     </script>
     <style>
         body {
     font-family: 'Montserrat', sans-serif;
-        }
-        form {
-            display: flex;
-            flex-direction: column;
-            margin-left: 100px;
-            width: 400px;
-        }
-        .container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        #auto-resize-textarea {
-            overflow: hidden;
-            resize: none;
-        }
+    background-color: #ddd;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  margin-left: 100px;
+  width: 400px;
+}
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#auto-resize-textarea {
+  overflow: overlay;
+  resize: none;
+}
+
+* {
+    box-sizing: border-box;
+}
+html {
+    color: #333;
+    line-height: 1.5rem;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  margin-top: 1rem;
+}
+
+.droparea {
+  margin: 1rem auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 384px;
+  max-width: 100%;
+  height: 160px;
+  border: 4px double rgb(182, 84, 32);
+  border-radius: 15px;
+}
+
+.droparea i {
+  font-size: 3rem;
+  flex-grow: 1;
+  padding-top: 1rem;
+}
+
+.green-border {
+  border-color: green;
+}
     </style>
 </head>
 <body>
@@ -48,7 +124,7 @@
         </div>
         <input type="text" name="nickname" placeholder="введите никнейм" style="width: 180px"/>
         <br>
-        <textarea name="text" id="auto-resize-textarea" rows="10" cols="20" placeholder="ваш паст: ..."></textarea>
+        <textarea name="text" class="droparea textarea-container" id="auto-resize-textarea" rows="10" cols="20" placeholder="ваш паст: ..."></textarea>
         <br>
         <div class="container">
             <input type="submit" value="Создать паст" style="width: 150px;">
