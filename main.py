@@ -31,7 +31,7 @@ def create_paste():
             }
             save_data(pastas)
         else:
-            return f'Похоже, вы создали пустой паст.\nПустые пасты не сохранаются.\n<a href="/">Назад</a>'
+            return f'Похоже, вы создали пустой паст.\nПустые пасты не сохраняются.\n<a href="/">Назад</a>'
         return f"Ваша паста создана! <a href='/paste/{pasta_id}'>Посмотреть паст</a>"
 
     return render_template('index.html')
