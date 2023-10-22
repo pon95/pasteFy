@@ -1,0 +1,66 @@
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: #ddd;
+}
+form {
+display: flex;
+flex-direction: column;
+margin-left: 100px;
+width: 400px;
+}
+.container {
+display: flex;
+justify-content: center;
+align-items: center;
+}
+#auto-resize-textarea {
+overflow: overlay;
+resize: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+html {
+  color: #333;
+  line-height: 1.5rem;
+}
+
+main {
+display: flex;
+flex-direction: column;
+}
+
+header {
+margin-top: 1rem;
+}
+
+.droparea {
+margin: 1rem auto;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+width: 384px;
+max-width: 100%;
+height: 160px;
+border: 4px none rgb(182, 84, 32);
+border-radius: 15px;
+}
+
+.droparea i {
+font-size: 3rem;
+flex-grow: 1;
+padding-top: 1rem;
+}
+
+.green-border {
+border: 3px dashed green !important;
+}
+.no-border {
+border: none !important;
+}
+td {
+  border: solid #333;
+}
+table{ border-collapse: collapse; }
