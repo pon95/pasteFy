@@ -107,9 +107,13 @@ table{ border-collapse: collapse; }
     });
 
     droparea.addEventListener('drop', handleDrop);
+    let textarea = document.querySelector('#auto-resize-textarea');
+textarea.addEventListener('input', function() {
+    textarea.style.height = textarea.scrollHeight + "px";
+})
 }
 
-document.addEventListener("DOMContentLoaded", initApp)
+//document.addEventListener("DOMContentLoaded", initApp)
 
 const handleDrop = (e) => {
     const textInput = document.getElementById('auto-resize-textarea');
@@ -156,18 +160,21 @@ function readDocxFile(file) {
         textarea.value = 'Произошла ошибка при чтении файла.';
     }
 }
+document.addEventListener('DOMContentLoaded', initApp);
+
     </script>
 </head>
 <body>
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data">
         <div class="container">
             <h1 class="class">Создание паста</h1>
         </div>
         <input type="text" name="nickname" placeholder="введите никнейм" style="width: 180px"/>
         <br>
-<textarea name="text" class="droparea textarea-container" id="auto-resize-textarea" placeholder="перетащите файл в поле или пишите ваш паст..."></textarea>    <!-- нужно сделать гибким -->
+        <textarea name="text" class="droparea textarea-container" id="auto-resize-textarea" placeholder="перетащите файл в поле или пишите ваш паст..."></textarea>    <!-- нужно сделать гибким -->
         <br>
         <div class="container">
+            <input type="file" name="file">
             <input type="submit" value="Создать паст" style="width: 150px;">
         </div>
         <p>Пожалуйста, скопируйте содержимое ниже, если будете добавлять docx-файлы:</p>
